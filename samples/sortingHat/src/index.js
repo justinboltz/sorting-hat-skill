@@ -15,6 +15,7 @@
 
 'use strict';
 
+
 /**
  * When editing your questions pay attention to your punctuation. Make sure you use question marks or periods.
  * Make sure the first answer is the correct one. Set at least 4 answers, any extras will be shuffled in.
@@ -22,122 +23,122 @@
 var questions = [
     {
         "You need to cross a bridge with two friends, but a troll insists on fighting one of you before you can cross. What do you do?": [
-            "Volunteer to fight",
-            "Trick the troll, and pass without fighting",
-            "Suggest drawing straws to see who fights",
-            "Suggest ganging up on the troll"
+            { answer: "Volunteer to fight", house: "Gryffindor"},
+            { answer: "Trick the troll, and pass without fighting", house: "Ravenclaw"},
+            { answer: "Suggest drawing straws to see who fights", house: "Hufflepuff"},
+            { answer: "Suggest ganging up on the troll", house: "Slytherin"}
         ]
     },
     {
         "What love potion scent would you be most attracted to?": [
-            "A crackling log fire",
-            "Fresh parchment",
-            "Home",
-            "The sea"
+            { answer: "A crackling log fire", house: "Gryffindor"},
+            { answer: "Fresh parchment", house: "Ravenclaw"},
+            { answer: "Home", house: "Hufflepuff"},
+            { answer: "The sea", house: "Slytherin"}
         ]
     },
     {
         "You enter an enchanted garden. What would you be most curious to examine first?": [
-            "The statue of an old wizard with a strangely twinkling eye",
-            "The silver leafed tree bearing golden apples",
-            "The fat red toadstools that appear to be talking to each other",
-            "The bubbling pool, in the depths of which something luminous is swirling"
+            { answer: "The statue of an old wizard with a strangely twinkling eye", house: "Gryffindor"},
+            { answer: "The silver leafed tree bearing golden apples", house: "Ravenclaw"},
+            { answer: "The fat red toadstools that appear to be talking to each other", house: "Hufflepuff"},
+            { answer: "The bubbling pool, in the depths of which something luminous is swirling", house: "Slytherin"}
         ]
     },
     {
         "Four goblets are placed before you. Which would you choose to drink?": [
-            "The golden liquid that makes sunspots dance around the room",
-            "The foaming frothy silvery liquid that sparkles as though containing ground diamonds",
-            "The smooth thick richly purple drink that has the scent of chocolate and plums",
-            "The mysterious black liquid that gleams like ink and gives off fumes that make you see strange visions"
+            { answer: "The golden liquid that makes sunspots dance around the room", house: "Gryffindor"},
+            { answer: "The foaming frothy silvery liquid that sparkles as though containing ground diamonds", house: "Ravenclaw"},
+            { answer: "The smooth thick richly purple drink that has the scent of chocolate and plums", house: "Hufflepuff"},
+            { answer: "The mysterious black liquid that gleams like ink and gives off fumes that make you see strange visions", house: "Slytherin"}
         ]
     },
     {
         "Which kind of instrument most pleases your ear?": [
-            "The drum",
-            "The piano",
-            "The trumpet",
-            "The violin"
+            { answer: "The drum", house: "Gryffindor"},
+            { answer: "The piano", house: "Ravenclaw"},
+            { answer: "The trumpet", house: "Hufflepuff"},
+            { answer: "The violin", house: "Slytherin"}
         ]
     },
     {
         "Which of the following would you most hate people to call you?": [
-            "Cowardly",
-            "Ignorant",
-            "Selfish",
-            "Ordinary"
+            { answer: "Cowardly", house: "Gryffindor"},
+            { answer: "Ignorant", house: "Ravenclaw"},
+            { answer: "Selfish", house: "Hufflepuff"},
+            { answer: "Ordinary", house: "Slytherin"}
         ]
     },
     {
         "After you died, what would you most like people to do when they hear your name?": [
-            "Tell stories about your adventures",
-            "Think about your achievements",
-            "Miss you, but smile",
-            "You don't care what people think about you, you lived life how you wanted"
+            { answer: "Tell stories about your adventures", house: "Gryffindor"},
+            { answer: "Think about your achievements", house: "Ravenclaw"},
+            { answer: "Miss you, but smile", house: "Hufflepuff"},
+            { answer: "You don't care what people think about you, you lived life how you wanted", house: "Slytherin"}
         ]
     },
     {
         "How would you like to be known to history?": [
-            "The Bold",
-            "The Wise",
-            "The Good",
-            "The Great"
+            { answer: "The Bold", house: "Gryffindor"},
+            { answer: "The Wise", house: "Ravenclaw"},
+            { answer: "The Good", house: "Hufflepuff"},
+            { answer: "The Great", house: "Slytherin"}
         ]
     },
     {
         "A muggle confronts you and says they know you are a magical. What do you do?": [
-            "Agree and walk away, leaving them to wonder",
-            "Ask what makes them think so",
-            "Tell them you are worried about their mental health and offer to call a doctor",
-            "Agree and ask whether they'd like a free sample of a jinx"
+            { answer: "Agree and walk away, leaving them to wonder", house: "Gryffindor"},
+            { answer: "Ask what makes them think so", house: "Ravenclaw"},
+            { answer: "Tell them you are worried about their mental health and offer to call a doctor", house: "Hufflepuff"},
+            { answer: "Agree and ask whether they'd like a free sample of a jinx", house: "Slytherin"}
         ]
     },
     {
         "Which nightmare would frighten you most?": [
-            "An eye at the keyhole of a dark windowless room in which you are locked",
-            "Standing on top of something very high with nothing to hold onto",
-            "Waking up to find that your friends and family don't know who you are",
-            "Being forced to speak in a silly voice that makes everyone laugh at you"
+            { answer: "An eye at the keyhole of a dark windowless room in which you are locked", house: "Gryffindor"},
+            { answer: "Standing on top of something very high with nothing to hold onto", house: "Ravenclaw"},
+            { answer: "Waking up to find that your friends and family don't know who you are", house: "Hufflepuff"},
+            { answer: "Being forced to speak in a silly voice that makes everyone laugh at you", house: "Slytherin"}
         ]
     },
     {
         "If you could invent a potion that would guarantee you one thing, which would you choose?": [
-            "Glory",
-            "Wisdom",
-            "Love",
-            "Power"
+            { answer: "Glory", house: "Gryffindor"},
+            { answer: "Wisdom", house: "Ravenclaw"},
+            { answer: "Love", house: "Hufflepuff"},
+            { answer: "Power", house: "Slytherin"}
         ]
     },
     {
         "If you could have any power, which would you choose?": [
-            "Invisibility",
-            "Mind reading",
-            "Speaking to animals",
-            "Change the past"
+            { answer: "Invisibility", house: "Gryffindor"},
+            { answer: "Mind reading", house: "Ravenclaw"},
+            { answer: "Speaking to animals", house: "Hufflepuff"},
+            { answer: "Change the past", house: "Slytherin"}
         ]
     },
     {
         "Which road tempts you most?": [
-            "The twisting, leaf-strewn path through the woods",
-            "The cobbled street lined with ancient buildings",
-            "The wide sunny grassy lane",
-            "The narrow dark lantern-lit alley"
+            { answer: "The twisting, leaf-strewn path through the woods", house: "Gryffindor"},
+            { answer: "The cobbled street lined with ancient buildings", house: "Ravenclaw"},
+            { answer: "The wide sunny grassy lane", house: "Hufflepuff"},
+            { answer: "The narrow dark lantern-lit alley", house: "Slytherin"}
         ]
     },
     {
         "Walking alone at night, you hear a peculiar cry that you believe to have a magical source. What do you do?": [
-            "Draw your wand and search out the source of the sound",
-            "Withdraw into the shadows to mentally review spells",
-            "Proceed with caution, keeping one hand on your wand",
-            "Draw your wand and stand your ground"
+            { answer: "Draw your wand and search out the source of the sound", house: "Gryffindor"},
+            { answer: "Withdraw into the shadows to mentally review spells", house: "Ravenclaw"},
+            { answer: "Proceed with caution, keeping one hand on your wand", house: "Hufflepuff"},
+            { answer: "Draw your wand and stand your ground", house: "Slytherin"}
         ]
     },
     {
         "Which would you rather be?": [
-            "Praised",
-            "Envied",
-            "Trusted",
-            "Feared"
+            { answer: "Praised", house: "Gryffindor"},
+            { answer: "Envied", house: "Ravenclaw"},
+            { answer: "Trusted", house: "Hufflepuff"},
+            { answer: "Feared", house: "Slytherin"}
         ]
     }
 ];
@@ -270,20 +271,17 @@ function getWelcomeResponse(callback) {
             + " questions. Just say the number of the answer you desire. Let's begin. ",
         shouldEndSession = false,
 
-        gameQuestions = populateGameQuestions(),
-//        correctAnswerIndex = Math.floor(Math.random() * (ANSWER_COUNT)), // Generate a random index for the correct answer, from 0 to 3
-        //roundAnswers = populateRoundAnswers(gameQuestions, 0, 0),
-
-        currentQuestionIndex = 0;
-var
+        gameQuestions = populateGameQuestions(),        
+        currentQuestionIndex = 0,
+      
         spokenQuestion = Object.keys(gameQuestions[currentQuestionIndex])[0],
         //TODO: change this when you want to randomize the questions         
-        roundAnswers = gameQuestions[currentQuestionIndex][spokenQuestion],
+        roundAnswers = shuffleAnswers(gameQuestions[currentQuestionIndex][spokenQuestion]),
         repromptText = "Question 1. " + spokenQuestion + " ",
         i, j;
 
     for (i = 0; i < ANSWER_COUNT; i++) {
-        repromptText += (i+1).toString() + ". " + roundAnswers[i] + ". ";
+        repromptText += (i+1).toString() + ". " + roundAnswers[i].answer + ". ";
     }
     speechOutput += repromptText;
     sessionAttributes = {
@@ -291,10 +289,7 @@ var
         "repromptText": repromptText,
         "currentQuestionIndex": currentQuestionIndex,
         "questions": gameQuestions,
-        "gryffScore": 0,
-        "ravenScore": 0,
-        "huffleScore": 0,
-        "slythScore": 0
+        "answersArray": []
     };
     callback(sessionAttributes,
         buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, shouldEndSession));
@@ -318,50 +313,36 @@ function populateGameQuestions() {
       }
       
       indexList[rand] = true;
-      
-      
-//        index -= 1;
-//        var temp = indexList[index];
-//        indexList[index] = indexList[rand];
-//        indexList[rand] = temp;
+    
       gameQuestions.push(questions[rand]);
     }
     return gameQuestions;
 }
 
-// function populateRoundAnswers(gameQuestionIndexes, correctAnswerIndex, correctAnswerTargetLocation) {
-//     // Get the answers for a given question, and place the correct answer at the spot marked by the
-//     // correctAnswerTargetLocation variable. Note that you can have as many answers as you want but
-//     // only ANSWER_COUNT will be selected.
-//     var answers = [],
-//         answersCopy = questions[gameQuestionIndexes[correctAnswerIndex]][Object.keys(questions[gameQuestionIndexes[correctAnswerIndex]])[0]],
-//         temp, i;
+function shuffleAnswers(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-//     var index = answersCopy.length;
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
 
-//     if (index < ANSWER_COUNT){
-//         throw "Not enough answers for question.";
-//     }
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
 
-//     // Shuffle the answers, excluding the first element.
-//     for (var j = 1; j < answersCopy.length; j++){
-//         var rand = Math.floor(Math.random() * (index - 1)) + 1;
-//         index -= 1;
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-//         var temp = answersCopy[index];
-//         answersCopy[index] = answersCopy[rand];
-//         answersCopy[rand] = temp;
-//     }
+  return array;
+}
 
-//     // Swap the correct answer into the target location
-//     for (i = 0; i < ANSWER_COUNT; i++) {
-//         answers[i] = answersCopy[i];
-//     }
-//     temp = answers[0];
-//     answers[0] = answers[correctAnswerTargetLocation];
-//     answers[correctAnswerTargetLocation] = temp;
-//     return answers;
-// }
+function mode(arr) {
+  return arr.sort(function(a,b){
+    return arr.filter(function(v){ return v===a }).length - arr.filter(function(v){ return v===b }).length
+  }).pop();
+}
 
 function handleAnswerRequest(intent, session, callback) {
     var speechOutput = "";
@@ -386,53 +367,28 @@ function handleAnswerRequest(intent, session, callback) {
     } else {
         var gameQuestions = session.attributes.questions,
             currentQuestionIndex = parseInt(session.attributes.currentQuestionIndex);
-        var gryffScore = session.attributes.gryffScore,
-            ravenScore = session.attributes.ravenScore,
-            huffleScore = session.attributes.huffleScore,
-            slythScore = session.attributes.slythScore;
+        var answersArray = session.attributes.answersArray;
 
-        if (parseInt(intent.slots.Answer.value) == 1) {
-            gryffScore++;
-        } else if (parseInt(intent.slots.Answer.value) == 2) {
-            ravenScore++;
-        } else if (parseInt(intent.slots.Answer.value) == 3) {
-            huffleScore++;
-        } else {
-            slythScore++;
-        }
-        // if currentQuestionIndex is 1 less than game length, we've reached the end and can exit the game session
+        answersArray.push((gameQuestions[currentQuestionIndex][Object.keys(gameQuestions[currentQuestionIndex])[0]])[parseInt(intent.slots.Answer.value-1)].house);    
+
+        // We've reached the end and can determine the user's house
         if (currentQuestionIndex == GAME_LENGTH - 1) {
             speechOutput = "Hmm, difficult. Very difficult. Where to put you?";
-            var houseScores = {
-                Gryffindor: gryffScore,
-                Ravenclaw: ravenScore,
-                Hufflepuff: huffleScore,
-                Slytherin: slythScore
-            };
-            var topHouse,
-                topScore;
-                
-            for (var key in houseScores) {
-                console.log(houseScores[key]);
-                console.log(topHouse);
-                console.log(key);
-                if (houseScores[key] > topScore || topHouse === undefined) {
-                    topHouse = key;
-                    topScore = houseScores[key];
-                }
-            }
+           
+            var topHouse = mode(answersArray);
             speechOutput += "Better be, " + topHouse.toString() + ". Congratulations!";
             callback(session.attributes,
                 buildSpeechletResponse(CARD_TITLE, speechOutput, "", true));
-        } else {
+        } 
+        // Game is still going on and there are more questions to answer
+        else {
             currentQuestionIndex += 1;
-            console.log("next question");
             var spokenQuestion = Object.keys(gameQuestions[currentQuestionIndex])[0],
-                roundAnswers = gameQuestions[currentQuestionIndex][spokenQuestion],
+                roundAnswers = shuffleAnswers(gameQuestions[currentQuestionIndex][spokenQuestion]),
                 questionIndexForSpeech = currentQuestionIndex + 1,
                 repromptText = "Question " + questionIndexForSpeech.toString() + ". " + spokenQuestion + " ";
             for (var i = 0; i < ANSWER_COUNT; i++) {
-                repromptText += (i+1).toString() + ". " + roundAnswers[i] + ". "
+                repromptText += (i+1).toString() + ". " + roundAnswers[i].answer + ". ";
             }
             speechOutput += "Hmm, interesting. " + repromptText;
 
@@ -441,15 +397,8 @@ function handleAnswerRequest(intent, session, callback) {
                 "repromptText": repromptText,
                 "currentQuestionIndex": currentQuestionIndex,
                 "questions": gameQuestions,
-                "gryffScore": gryffScore,
-                "ravenScore": ravenScore,
-                "huffleScore": huffleScore,
-                "slythScore": slythScore
+                "answersArray": answersArray
             };
-            console.log("Gryffindor score: " + gryffScore);
-            console.log("Ravenclaw score: " + ravenScore);
-            console.log("Hufflepuff score: " + huffleScore);
-            console.log("Slytherin score: " + slythScore);
             callback(sessionAttributes,
                 buildSpeechletResponse(CARD_TITLE, speechOutput, session.attributes.repromptText, false));
         }
