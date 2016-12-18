@@ -95,7 +95,7 @@ var questions = [
         "If someone conjured a love potion for you, which of these scents would it have?": [
             { answer: "A crackling log fire", house: "Gryffindor"},
             { answer: "Fresh parchment", house: "Ravenclaw"},
-            { answer: "Home", house: "Hufflepuff"},
+            { answer: "Your Home", house: "Hufflepuff"},
             { answer: "The sea", house: "Slytherin"}
         ]
     },
@@ -216,7 +216,7 @@ exports.handler = function (event, context) {
          * prevent someone else from configuring a skill that sends requests to this function.
          */
 
-      if (event.session.application.applicationId !== "amzn1.ask.skill.02b4832d-0d50-4f1f-890c-fbc7ce9a486f") {
+      if (event.session.application.applicationId !== "amzn1.ask.skill.69547a25-1e61-417d-8393-82550090f3f1") {
          context.fail("Invalid Application ID");
       }
 
@@ -476,9 +476,7 @@ function handleAnswerRequest(intent, session, callback) {
         // We've reached the end and can determine the user's house
         if (currentQuestionIndex == GAME_LENGTH - 1) {
             speechOutput = "Alright, now let me see. Hmm, difficult. Very difficult. Where to put you?";
-            console.log("answersArray before mode: " + answersArray);
             var topHouse = mode(answersArray);
-            console.log("final answersArray: " + answersArray);
             speechOutput += "Better be, " + topHouse.toString() + ". Congratulations!";
             trackEvent(
                 'Game Completion',
