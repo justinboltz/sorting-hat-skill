@@ -8,18 +8,43 @@
  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
-/**
- * This sample shows how to create a simple Trivia skill with a multiple choice format. The skill
- * supports 1 player at a time, and does not support games across sessions.
- */
-
 'use strict';
 
+var express = require('express');
+var request = require('request');
 
-/**
- * When editing your questions pay attention to your punctuation. Make sure you use question marks or periods.
- * Make sure the first answer is the correct one. Set at least 4 answers, any extras will be shuffled in.
- */
+var app = express();
+
+var GA_TRACKING_ID = 'UA-89072533-1';
+
+function trackEvent(category, action, label, value, callback) {
+    var data = {
+        v: '1', // API Version.
+        tid: GA_TRACKING_ID, // Tracking ID / Property ID.
+        // Anonymous Client Identifier. Ideally, this should be a UUID that
+        // is associated with particular user, device, or browser instance.
+        cid: '555',
+        t: 'event', // Event hit type.
+        ec: category, // Event category.
+        ea: action, // Event action.
+        el: label // Event label.
+    };
+
+    request.post(
+        'http://www.google-analytics.com/collect', {
+            form: data
+        },
+        function(err, response) {
+            if (err) { return callback(err); }
+            if (response.statusCode !== 200) {
+                return callback(new Error('Tracking failed'));
+            }
+            callback();
+        }
+    );
+}
+
+
 var questions = [
     {
         "You need to cross a bridge with two friends, but a troll insists on fighting one of you before you can cross. What do you do?": [
@@ -30,10 +55,47 @@ var questions = [
         ]
     },
     {
-        "What love potion scent would you be most attracted to?": [
+        "Which of these two options do you prefer?": [
+            { answer: "Dawn", house: "Gryffindor", house2: "Ravenclaw"},
+            { answer: "Dusk", house: "Hufflepuff", house2: "Slytherin"}
+        ]
+    },
+    {
+        "Which of these two options do you prefer?": [
+            { answer: "Forest", house: "Gryffindor", house2: "Ravenclaw"},
+            { answer: "River", house: "Hufflepuff", house2: "Slytherin"}
+        ]
+    },
+    {
+        "Which of these two options do you prefer?": [
+            { answer: "Moon", house: "Ravenclaw", house2: "Slytherin"},
+            { answer: "Stars", house: "Gryffindor", house2: "Hufflepuff"}
+        ]
+    },
+    {
+        "Which of the following do you find most difficult to deal with?": [
+            { answer: "Hunger", house: "Ravenclaw", house2: "Hufflepuff"},
+            { answer: "Cold", house: "Hufflepuff", house2: "Slytherin"},
+            { answer: "Loneliness", house: "Gryffindor", house2: "Hufflepuff"},
+            { answer: "Boredom", house: "Gryffindor", house2: "Slytherin"},
+            { answer: "Being Ignored", house: "Ravenclaw", house2: "Slytherin"}
+        ]
+    },
+    {
+        "What are you most looking forward to learning at Hogwarts?": [
+            { answer: "Transfiguration", house: "Ravenclaw"},
+            { answer: "Hexes and Jinxes", house: "Slytherin"},
+            { answer: "All about magical creatures", house: "Hufflepuff"},
+            { answer: "Secrets about the castle", house: "Gryffindor"},
+            { answer: "Flying on a broomstick", house: "Gryffindor", house2: "Hufflepuff"},
+            { answer: "Apparition and Disapparition", house: "Ravenclaw", house2: "Slytherin"}
+        ]
+    },
+    {
+        "If someone conjured a love potion for you, which of these scents would it have?": [
             { answer: "A crackling log fire", house: "Gryffindor"},
             { answer: "Fresh parchment", house: "Ravenclaw"},
-            { answer: "Home", house: "Hufflepuff"},
+            { answer: "Your Home", house: "Hufflepuff"},
             { answer: "The sea", house: "Slytherin"}
         ]
     },
@@ -54,7 +116,7 @@ var questions = [
         ]
     },
     {
-        "Which kind of instrument most pleases your ear?": [
+        "Which kind of instrument most pleases your ears?": [
             { answer: "The drum", house: "Gryffindor"},
             { answer: "The piano", house: "Ravenclaw"},
             { answer: "The trumpet", house: "Hufflepuff"},
@@ -154,7 +216,7 @@ exports.handler = function (event, context) {
          * prevent someone else from configuring a skill that sends requests to this function.
          */
 
-      if (event.session.application.applicationId !== "amzn1.ask.skill.02b4832d-0d50-4f1f-890c-fbc7ce9a486f") {
+      if (event.session.application.applicationId !== "amzn1.ask.skill.69547a25-1e61-417d-8393-82550090f3f1") {
          context.fail("Invalid Application ID");
       }
 
@@ -189,8 +251,6 @@ exports.handler = function (event, context) {
 function onSessionStarted(sessionStartedRequest, session) {
     console.log("onSessionStarted requestId=" + sessionStartedRequest.requestId
         + ", sessionId=" + session.sessionId);
-
-    // add any session init logic here
 }
 
 /**
@@ -225,14 +285,47 @@ function onIntent(intentRequest, session, callback) {
 
     // dispatch custom intents to handlers here
     if ("AnswerIntent" === intentName) {
+        trackEvent(
+            'Intent',
+            'Answer Intent',
+            'answer with other speech',
+            null,
+            function(err) {
+                if (err) {
+                    return next(err);
+                }
+            }
+        );
         handleAnswerRequest(intent, session, callback);
     } else if ("AnswerOnlyIntent" === intentName) {
+        trackEvent(
+            'Intent',
+            'Answer Intent',
+            'answer only',
+            null,
+            function(err) {
+                if (err) {
+                    return next(err);
+                }
+            }
+        );
         handleAnswerRequest(intent, session, callback);
     } else if ("AMAZON.YesIntent" === intentName) {
         handleAnswerRequest(intent, session, callback);
     } else if ("AMAZON.NoIntent" === intentName) {
         handleAnswerRequest(intent, session, callback);
     } else if ("AMAZON.StartOverIntent" === intentName) {
+        trackEvent(
+            'Intent',
+            'Start Intent',
+            'game started',
+            null,
+            function(err) {
+                if (err) {
+                    return next(err);
+                }
+            }
+        );
         getWelcomeResponse(callback);
     } else if ("AMAZON.RepeatIntent" === intentName) {
         handleRepeatRequest(intent, session, callback);
@@ -261,7 +354,6 @@ function onSessionEnded(sessionEndedRequest, session) {
 
 // ------- Skill specific business logic -------
 
-var ANSWER_COUNT = 4;
 var GAME_LENGTH = 7;
 var CARD_TITLE = "Sorting Hat"; // Be sure to change this for your skill.
 
@@ -275,12 +367,11 @@ function getWelcomeResponse(callback) {
         currentQuestionIndex = 0,
       
         spokenQuestion = Object.keys(gameQuestions[currentQuestionIndex])[0],
-        //TODO: change this when you want to randomize the questions         
-        roundAnswers = shuffleAnswers(gameQuestions[currentQuestionIndex][spokenQuestion]),
+        roundAnswers = shuffleArray(gameQuestions[currentQuestionIndex][spokenQuestion]),
         repromptText = "Question 1. " + spokenQuestion + " ",
         i, j;
 
-    for (i = 0; i < ANSWER_COUNT; i++) {
+    for (i = 0; i < roundAnswers.length; i++) {
         repromptText += (i+1).toString() + ". " + roundAnswers[i].answer + ". ";
     }
     speechOutput += repromptText;
@@ -289,7 +380,8 @@ function getWelcomeResponse(callback) {
         "repromptText": repromptText,
         "currentQuestionIndex": currentQuestionIndex,
         "questions": gameQuestions,
-        "answersArray": []
+        "answersArray": [],
+        "roundAnswers": roundAnswers
     };
     callback(sessionAttributes,
         buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, shouldEndSession));
@@ -319,7 +411,7 @@ function populateGameQuestions() {
     return gameQuestions;
 }
 
-function shuffleAnswers(array) {
+function shuffleArray(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -340,7 +432,7 @@ function shuffleAnswers(array) {
 
 function mode(arr) {
   return arr.sort(function(a,b){
-    return arr.filter(function(v){ return v===a }).length - arr.filter(function(v){ return v===b }).length
+    return arr.filter(function(v){ return v===a }).length - arr.filter(function(v){ return v===b }).length;
   }).pop();
 }
 
@@ -348,7 +440,11 @@ function handleAnswerRequest(intent, session, callback) {
     var speechOutput = "";
     var sessionAttributes = {};
     var gameInProgress = session.attributes && session.attributes.questions;
-    var answerSlotValid = isAnswerSlotValid(intent);
+    var gameQuestions = session.attributes.questions,
+        currentQuestionIndex = parseInt(session.attributes.currentQuestionIndex),
+        spokenQuestion = Object.keys(gameQuestions[currentQuestionIndex])[0],
+        roundAnswers = session.attributes.roundAnswers;
+    var answerSlotValid = isAnswerSlotValid(intent, roundAnswers);
 
     if (!gameInProgress) {
         // If the user responded with an answer but there is no game in progress, ask the user
@@ -358,51 +454,74 @@ function handleAnswerRequest(intent, session, callback) {
         callback(sessionAttributes,
             buildSpeechletResponse(CARD_TITLE, speechOutput, speechOutput, false));
     } else if (!answerSlotValid) {
-        // If the user provided answer isn't a number > 0 and < ANSWER_COUNT,
-        // return an error message to the user. Remember to guide the user into providing correct values.
         var reprompt = session.attributes.speechOutput;
-        var speechOutput = "Your answer must be a number between 1 and " + ANSWER_COUNT + ". " + reprompt;
+        var speechOutput = "Your answer must be a number between 1 and " + roundAnswers.length + ". " + reprompt;
         callback(session.attributes,
             buildSpeechletResponse(CARD_TITLE, speechOutput, reprompt, false));
     } else {
-        var gameQuestions = session.attributes.questions,
-            currentQuestionIndex = parseInt(session.attributes.currentQuestionIndex);
         var answersArray = session.attributes.answersArray;
 
-        answersArray.push((gameQuestions[currentQuestionIndex][Object.keys(gameQuestions[currentQuestionIndex])[0]])[parseInt(intent.slots.Answer.value-1)].house);    
+        console.log(gameQuestions[currentQuestionIndex]);
+        console.log(parseInt(intent.slots.Answer.value));
+        console.log(roundAnswers[parseInt(intent.slots.Answer.value-1)]);
+      
+        answersArray.push((gameQuestions[currentQuestionIndex][Object.keys(gameQuestions[currentQuestionIndex])[0]])[parseInt(intent.slots.Answer.value-1)].house); 
+        // if there is a second house on the answer, add that to the array as well
+        if ((gameQuestions[currentQuestionIndex][Object.keys(gameQuestions[currentQuestionIndex])[0]])[parseInt(intent.slots.Answer.value-1)].house2) {
+            answersArray.push((gameQuestions[currentQuestionIndex][Object.keys(gameQuestions[currentQuestionIndex])[0]])[parseInt(intent.slots.Answer.value-1)].house2);
+        }
+        
+        console.log(answersArray);
 
         // We've reached the end and can determine the user's house
         if (currentQuestionIndex == GAME_LENGTH - 1) {
-            speechOutput = "Hmm, difficult. Very difficult. Where to put you?";
-           
+            speechOutput = "Alright, now let me see. Hmm, difficult. Very difficult. Where to put you?";
             var topHouse = mode(answersArray);
             speechOutput += "Better be, " + topHouse.toString() + ". Congratulations!";
+            trackEvent(
+                'Game Completion',
+                'House Assignment',
+                topHouse.toString(),
+                null,
+                function(err) {
+                    if (err) {
+                        return next(err);
+                    }
+                }
+            );
             callback(session.attributes,
                 buildSpeechletResponse(CARD_TITLE, speechOutput, "", true));
         } 
         // Game is still going on and there are more questions to answer
         else {
             currentQuestionIndex += 1;
-            var spokenQuestion = Object.keys(gameQuestions[currentQuestionIndex])[0],
-                roundAnswers = shuffleAnswers(gameQuestions[currentQuestionIndex][spokenQuestion]),
-                questionIndexForSpeech = currentQuestionIndex + 1,
+            spokenQuestion = Object.keys(gameQuestions[currentQuestionIndex])[0],
+            roundAnswers = shuffleArray(gameQuestions[currentQuestionIndex][spokenQuestion]);
+            var questionIndexForSpeech = currentQuestionIndex + 1,
                 repromptText = "Question " + questionIndexForSpeech.toString() + ". " + spokenQuestion + " ";
-            for (var i = 0; i < ANSWER_COUNT; i++) {
+            for (var i = 0; i < roundAnswers.length; i++) {
                 repromptText += (i+1).toString() + ". " + roundAnswers[i].answer + ". ";
             }
-            speechOutput += "Hmm, interesting. " + repromptText;
+            speechOutput += randomResponse() + repromptText;
 
             sessionAttributes = {
                 "speechOutput": repromptText,
                 "repromptText": repromptText,
                 "currentQuestionIndex": currentQuestionIndex,
                 "questions": gameQuestions,
-                "answersArray": answersArray
+                "answersArray": answersArray,
+                "roundAnswers": roundAnswers
             };
             callback(sessionAttributes,
-                buildSpeechletResponse(CARD_TITLE, speechOutput, session.attributes.repromptText, false));
+                buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, false));
         }
     }
+}
+
+function randomResponse() {
+    var responseArray = ["Hmm, interesting. ",  "I see. Okay. ", "Hmm, alright then. "];
+    
+    return shuffleArray(responseArray)[0];
 }
 
 function handleRepeatRequest(intent, session, callback) {
@@ -447,10 +566,10 @@ function handleFinishSessionRequest(intent, session, callback) {
         buildSpeechletResponseWithoutCard("Good bye!", "", true));
 }
 
-function isAnswerSlotValid(intent) {
+function isAnswerSlotValid(intent, roundAnswers) {
     var answerSlotFilled = intent.slots && intent.slots.Answer && intent.slots.Answer.value;
     var answerSlotIsInt = answerSlotFilled && !isNaN(parseInt(intent.slots.Answer.value));
-    return answerSlotIsInt && parseInt(intent.slots.Answer.value) < (ANSWER_COUNT + 1) && parseInt(intent.slots.Answer.value) > 0;
+    return answerSlotIsInt && parseInt(intent.slots.Answer.value) < (roundAnswers.length + 1) && parseInt(intent.slots.Answer.value) > 0;
 }
 
 // ------- Helper functions to build responses -------
