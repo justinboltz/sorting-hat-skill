@@ -25,9 +25,9 @@ function trackEvent(category, action, label, value, callback) {
         // is associated with particular user, device, or browser instance.
         cid: '555',
         t: 'event', // Event hit type.
-        ec: 'category', // Event category.
-        ea: 'action', // Event action.
-        el: 'label' // Event label.
+        ec: category, // Event category.
+        ea: action, // Event action.
+        el: label // Event label.
     };
 
     request.post(
@@ -513,7 +513,7 @@ function handleAnswerRequest(intent, session, callback) {
                 "roundAnswers": roundAnswers
             };
             callback(sessionAttributes,
-                buildSpeechletResponse(CARD_TITLE, speechOutput, session.attributes.repromptText, false));
+                buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, false));
         }
     }
 }
